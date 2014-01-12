@@ -1,0 +1,102 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="4514" systemVersion="13B42" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" initialViewController="1MF-qW-aE7">
+    <dependencies>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="3747"/>
+    </dependencies>
+    <scenes>
+        <!--Tab Bar Controller-->
+        <scene sceneID="xuH-r7-fkS">
+            <objects>
+                <tabBarController definesPresentationContext="YES" id="1MF-qW-aE7" sceneMemberID="viewController">
+                    <simulatedTabBarMetrics key="simulatedBottomBarMetrics"/>
+                    <tabBar key="tabBar" contentMode="scaleToFill" id="hRl-DM-meN">
+                        <rect key="frame" x="129" y="330" width="163" height="49"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMinY="YES"/>
+                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                    </tabBar>
+                    <connections>
+                        <segue destination="HKI-YN-98l" kind="relationship" relationship="viewControllers" id="pes-L3-YmT"/>
+                    </connections>
+                </tabBarController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="AaA-mH-Lof" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="857" y="690"/>
+        </scene>
+        <!--Set Card Game View Controller - Item-->
+        <scene sceneID="q22-fm-X5d">
+            <objects>
+                <viewController id="HKI-YN-98l" customClass="SetCardGameViewController" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="RKy-nU-aKn"/>
+                        <viewControllerLayoutGuide type="bottom" id="h0f-9P-R6D"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="xhX-gN-lcq">
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="480"/>
+                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                        <subviews>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="QmC-3G-mb4">
+                                <rect key="frame" x="20" y="104" width="280" height="284"/>
+                                <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                                <color key="backgroundColor" red="0.0" green="0.50196081399917603" blue="0.25098040699958801" alpha="1" colorSpace="calibratedRGB"/>
+                            </view>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ulF-X1-lJo">
+                                <rect key="frame" x="122" y="396" width="76" height="30"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <state key="normal" title="New Game">
+                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                                <connections>
+                                    <action selector="newGame" destination="HKI-YN-98l" eventType="touchUpInside" id="BuG-P6-sSa"/>
+                                </connections>
+                            </button>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="vlM-7O-OrN">
+                                <rect key="frame" x="20" y="396" width="60" height="30"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <state key="normal" title="+3 cards">
+                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                                <connections>
+                                    <action selector="addCards" destination="HKI-YN-98l" eventType="touchUpInside" id="12k-EO-OQR"/>
+                                </connections>
+                            </button>
+                            <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Score: 0" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="1fQ-8c-V0P">
+                                <rect key="frame" x="20" y="75" width="64" height="21"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstItem="ulF-X1-lJo" firstAttribute="baseline" secondItem="vlM-7O-OrN" secondAttribute="baseline" id="0Hq-YI-Khj"/>
+                            <constraint firstItem="QmC-3G-mb4" firstAttribute="top" secondItem="1fQ-8c-V0P" secondAttribute="bottom" constant="8" symbolic="YES" id="Cbf-84-9aD"/>
+                            <constraint firstItem="ulF-X1-lJo" firstAttribute="centerX" secondItem="QmC-3G-mb4" secondAttribute="centerX" id="Gog-cC-1HR"/>
+                            <constraint firstItem="vlM-7O-OrN" firstAttribute="top" secondItem="QmC-3G-mb4" secondAttribute="bottom" constant="8" symbolic="YES" id="HJD-ck-0tB"/>
+                            <constraint firstItem="1fQ-8c-V0P" firstAttribute="top" secondItem="RKy-nU-aKn" secondAttribute="bottom" constant="11" id="NRy-Z3-5uA"/>
+                            <constraint firstItem="1fQ-8c-V0P" firstAttribute="leading" secondItem="xhX-gN-lcq" secondAttribute="leading" constant="20" symbolic="YES" id="gCB-xP-SSP"/>
+                            <constraint firstItem="h0f-9P-R6D" firstAttribute="top" secondItem="vlM-7O-OrN" secondAttribute="bottom" constant="5" id="kJ4-WA-nt9"/>
+                            <constraint firstAttribute="trailing" secondItem="QmC-3G-mb4" secondAttribute="trailing" constant="20" symbolic="YES" id="kaO-Ed-SnZ"/>
+                            <constraint firstItem="1fQ-8c-V0P" firstAttribute="leading" secondItem="QmC-3G-mb4" secondAttribute="leading" id="r10-JX-tgo"/>
+                            <constraint firstItem="QmC-3G-mb4" firstAttribute="leading" secondItem="vlM-7O-OrN" secondAttribute="leading" id="va6-FD-QIb"/>
+                        </constraints>
+                    </view>
+                    <tabBarItem key="tabBarItem" title="Item" id="deD-73-lgh"/>
+                    <navigationItem key="navigationItem" id="Jqm-hG-dT6"/>
+                    <connections>
+                        <outlet property="addCardsButton" destination="vlM-7O-OrN" id="nic-sD-Vr0"/>
+                        <outlet property="scoreLabel" destination="1fQ-8c-V0P" id="aej-K4-X4j"/>
+                        <outlet property="table" destination="QmC-3G-mb4" id="8EL-YC-pOD"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="Cut-lh-5b3" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1385" y="396"/>
+        </scene>
+    </scenes>
+    <color key="tintColor" red="1" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+    <simulatedMetricsContainer key="defaultSimulatedMetrics">
+        <simulatedStatusBarMetrics key="statusBar"/>
+        <simulatedOrientationMetrics key="orientation"/>
+        <simulatedScreenMetrics key="destination"/>
+    </simulatedMetricsContainer>
+</document>

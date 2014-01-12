@@ -1,0 +1,24 @@
+- (void)showCardViewsAnimatedStartingAtViewIndex:(NSUInteger)startIndex
+                                    withDuration:(CGFloat)duration
+                                           delay:(CGFloat)startDelay
+                                  delayIncrement:(CGFloat)delayIncrement
+// 'startIndex' parameter refers to the array self.cardViews
+{
+    NSUInteger index = startIndex;
+    while (index < [self.cardViews count]) {
+        NSUInteger row = index / self.grid.columnCount;
+        NSUInteger column = index % self.grid.columnCount;
+        UIView *cardView = self.cardViews[index];
+        [UIView animateWithDuration:duration
+                              delay:startDelay
+                            options:UIViewAnimationOptionCurveEaseOut
+                         animations:^{
+                             cardView.frame = [self.grid frameOfCellAtRow:row inColumn:column];
+                             cardView.alpha = 1.0;
+                         } completion:^(BOOL finished) {
+                             NULL;
+                         }];
+        startDelay += delayIncrement;
+        index++;
+    }
+}
