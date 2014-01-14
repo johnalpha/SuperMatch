@@ -14,49 +14,20 @@
 
 @implementation SetCardGameViewController
 
+- (void)setUp
+{
+    self.cardAspectRatio = 0.75;
+    self.numberOfCardsToDeal = 12;
+    self.numberOfCardsToMatch = 3;
+    self.matchedCardsAreToBeRemoved = YES;
+}
+
 - (Deck *)createDeck {
     return [[SetCardDeck alloc]init];
 }
 
-- (NSUInteger)numberOfCardsToDeal {
-    return 12;
-}
-
-- (NSUInteger)numberOfCardsToMatch {
-    return  3;
-}
-
-- (CGFloat)cardAspectRatio {
-    return 0.75;
-}
-
 - (UIView *)cardViewInRectangle:(CGRect)rect {
     return [[SetCardView alloc]initWithFrame:rect];
-}
-
-- (void)updateCardViews
-// matched cards will be removed.
-{
-    BOOL cardsHaveBeenRemoved = NO;
-    NSUInteger index = 0;
-    UIView *cardView = [self.cardViews firstObject];
-    
-    while (cardView) {
-        Card *card = [self.game cardAtIndex:cardView.tag];
-        if (card.isMatched) {
-            [self.cardViews removeObject:cardView];
-            [cardView removeFromSuperview];
-            cardsHaveBeenRemoved = YES;
-        } else {
-            [self setCardView:cardView usingCard:card];
-            index++;
-        }
-        if (index < [self.cardViews count]) {
-            cardView = self.cardViews[index];
-        } else {
-            break;
-        }
-    }
 }
 
 - (void)setCardView:(UIView *)cardView usingCard:(Card *)card {
@@ -69,6 +40,13 @@
             setCardView.colour = setCard.colour;
             setCardView.shading = setCard.shading;
             setCardView.chosen = setCard.isChosen;
+            
+//            [UIView transitionWithView:setCardView
+//                              duration:0.75
+//                               options:UIViewAnimationOptionTransitionCrossDissolve
+//                            animations:^{
+//                                setCardView.chosen = setCard.isChosen;
+//                            }completion:NULL];
         }
     }
     

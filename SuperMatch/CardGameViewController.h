@@ -6,7 +6,7 @@
 //  Copyright (c) 2013 CS193p. All rights reserved.
 //
 //  ABSTRACT CLASS.
-//  Sub-classes must implement methods as indicated below.
+//  Sub-classes must set properties and implement methods as indicated below.
 
 #import <UIKit/UIKit.h>
 #import "CardMatchingGame.h"
@@ -14,19 +14,16 @@
 
 @interface CardGameViewController : UIViewController
 
-@property (strong, nonatomic, readwrite) CardMatchingGame *game;
-@property (strong, nonatomic, readwrite) NSMutableArray *cardViews; // of UIViews
+//--------------------- properties which must be set by concrete subclasses --------------------------
+@property (nonatomic) BOOL matchedCardsAreToBeRemoved;
+@property (nonatomic) NSUInteger numberOfCardsToDeal;
+@property (nonatomic) NSUInteger numberOfCardsToMatch;
+@property (nonatomic) CGFloat cardAspectRatio;
 
-//@property (strong, nonatomic, readonly) CardMatchingGame *game;
-//@property (strong, nonatomic, readonly) NSMutableArray *cardViews;  // of UIViews
-
-//----------------- abstract methods ------------- protected - for sub-classes ------------------------
+//----------------- abstract methods ------------------- protected - for sub-classes -----------------
+- (void)setUp;
 - (Deck *)createDeck;
-- (NSUInteger)numberOfCardsToDeal;
-- (NSUInteger)numberOfCardsToMatch;
-- (CGFloat)cardAspectRatio;
 - (UIView *)cardViewInRectangle:(CGRect)rect;
-- (void)updateCardViews;
 - (void)setCardView:(UIView *)cardView usingCard:(Card *)card;
 //-----------------------------------------------------------------------------------------------------
 

@@ -28,6 +28,7 @@ static const int COST_TO_CHOOSE = 1;
 - (NSArray *)addCards:(NSUInteger)numberOfCardsToAdd;
 
 @property (nonatomic, readonly) NSInteger score;
+@property (nonatomic, readonly) NSInteger matchScore;
 @property (strong, nonatomic, readonly) NSMutableArray *cards;  // of Card
 
 @property (nonatomic) NSUInteger numberOfCardsToMatch;

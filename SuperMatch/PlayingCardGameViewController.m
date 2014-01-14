@@ -14,31 +14,20 @@
 
 @implementation PlayingCardGameViewController
 
+- (void)setUp
+{
+    self.cardAspectRatio = 0.75;
+    self.numberOfCardsToDeal = 22;
+    self.numberOfCardsToMatch = 2;
+    self.matchedCardsAreToBeRemoved = NO;
+}
+
 - (Deck *)createDeck {
     return [[PlayingCardDeck alloc]init];
 }
 
-- (NSUInteger)numberOfCardsToDeal {
-    return 22;
-}
-
-- (NSUInteger)numberOfCardsToMatch {
-    return  2;
-}
-
-- (CGFloat)cardAspectRatio {
-    return 0.75;
-}
-
 - (UIView *)cardViewInRectangle:(CGRect)rect {
     return [[PlayingCardView alloc]initWithFrame:rect];
-}
-
-- (void)updateCardViews {
-    for (UIView *cardView in self.cardViews) {
-        [self setCardView:cardView
-                usingCard:[self.game cardAtIndex:cardView.tag]];
-    }
 }
 
 - (void)setCardView:(UIView *)cardView usingCard:(Card *)card {

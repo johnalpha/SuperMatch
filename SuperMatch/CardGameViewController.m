@@ -13,8 +13,8 @@
 @property (weak, nonatomic) IBOutlet UIView *table;
 @property (weak, nonatomic) IBOutlet UILabel *scoreLabel;
 @property (weak, nonatomic) IBOutlet UIButton *addCardsButton;
-//@property (strong, nonatomic, readwrite) CardMatchingGame *game;
-//@property (strong, nonatomic, readwrite) NSMutableArray *cardViews; // of UIViews
+@property (strong, nonatomic) CardMatchingGame *game;
+@property (strong, nonatomic) NSMutableArray *cardViews; // of UIViews
 @property (strong, nonatomic) Grid *grid;
 @property (strong, nonatomic) UIDynamicAnimator *animator;
 @property (strong, nonatomic) NSMutableArray *attachmentBehaviours; // of UIAttachmentBehaviours
@@ -25,33 +25,18 @@
 
 #pragma mark - abstract methods
 
+- (void)setUp
+{
+}
+
 - (Deck *)createDeck
 {
     return nil;
 }
 
-- (NSUInteger)numberOfCardsToDeal
-{
-    return 0;
-}
-
-- (NSUInteger)numberOfCardsToMatch
-{
-    return  0;
-}
-
-- (CGFloat)cardAspectRatio
-{
-    return 0.0;
-}
-
 - (UIView *)cardViewInRectangle:(CGRect)rect
 {
     return nil;
-}
-
-- (void)updateCardViews
-{
 }
 
 - (void)setCardView:(UIView *)cardView usingCard:(Card *)card
@@ -63,9 +48,9 @@
 - (CardMatchingGame *)game
 {
     if (!_game) {
-        _game = [[CardMatchingGame alloc] initWithCardCount:[self numberOfCardsToDeal]
+        _game = [[CardMatchingGame alloc] initWithCardCount:self.numberOfCardsToDeal
                                                   usingDeck:[self createDeck]];
-        _game.numberOfCardsToMatch = [self numberOfCardsToMatch];
+        _game.numberOfCardsToMatch = self.numberOfCardsToMatch;
     }
     return _game;
 }
@@ -104,8 +89,8 @@
 
 - (void)viewDidLoad
 {
-    NSLog(@"viewDidLoad");
     [super viewDidLoad];
+    [self setUp];
     [self createCardViewsFromCards:self.game.cards];
     self.addCardsButton.enabled = YES;
     self.cardsArePinchedTogether = NO;
@@ -114,15 +99,12 @@
 
 - (void)viewDidAppear:(BOOL)animated
 {
-    NSLog(@"viewDidAppear");
     [super viewDidAppear:animated];
     if (!self.cardsArePinchedTogether) [self redealCardViews];
 }
 
 - (void)didRotateFromInterfaceOrientation:(UIInterfaceOrientation)fromInterfaceOrientation
 {
-    NSLog(@"didRotateFromInterfaceOrientation");
-    NSLog(@"table: width = %g, height = %g", self.table.bounds.size.width, self.table.bounds.size.height);
     [super didRotateFromInterfaceOrientation:fromInterfaceOrientation];
     if (self.cardsArePinchedTogether) {
         CGPoint centreOfTable = {(0.5 * self.table.bounds.size.width), (0.5 * self.table.bounds.size.height)};
@@ -133,23 +115,6 @@
         [self rearrangeCardViews];
     }
 }
-
-//- (void)viewDidLayoutSubviews
-//{
-//    NSLog(@"viewDidLayoutSubviews");
-//    NSLog(@"width = %g, height = %g", self.table.bounds.size.width, self.table.bounds.size.height);
-//    [super viewDidLayoutSubviews];
-//    NSLog(@"width = %g, height = %g", self.table.bounds.size.width, self.table.bounds.size.height);
-//
-//    if (self.cardsArePinchedTogether) {
-//        CGPoint centreOfTable = {(0.5 * self.table.bounds.size.width), (0.5 * self.table.bounds.size.height)};
-//        for (UIAttachmentBehavior *attachmentBehaviour in self.attachmentBehaviours) {
-//            attachmentBehaviour.anchorPoint = centreOfTable;
-//        }
-//    } else {
-//        [self rearrangeCardViews];
-//    }
-//}
 
 #pragma mark -
 
@@ -165,7 +130,7 @@
 // cardView will be zero size and centred at the lower left-hand corner of the table.
 {
     CGPoint location = CGPointMake(0.0, self.table.bounds.size.height); // lower left-hand corner of table
-    UIView *cardView = [self cardViewInRectangle:CGRectZero];   // CGRectZero OK?
+    UIView *cardView = [self cardViewInRectangle:CGRectZero];
     if (cardView) {
         [self setCardView:cardView usingCard:card];
         [cardView addGestureRecognizer:[[UITapGestureRecognizer alloc]initWithTarget:self
@@ -187,7 +152,7 @@
 // returns success or failure.
 {
     self.grid.size = self.table.bounds.size;
-    self.grid.cellAspectRatio = [self cardAspectRatio];
+    self.grid.cellAspectRatio = self.cardAspectRatio;
     self.grid.minimumNumberOfCells = [self.cardViews count];
     self.grid.maxCellWidth = self.table.bounds.size.width / MINIMUM_COLUMN_COUNT;
     return (self.grid.inputsAreValid ? YES : NO);
@@ -198,8 +163,6 @@
 {
     if ([self setGrid]) {
         [self dealCardViews];
-//        self.addCardsButton.enabled = YES;
-//        self.cardsArePinchedTogether = NO;
     } else {
         NSLog(@"redealCardViews: grid is invalid");
     }
@@ -233,8 +196,6 @@
 {
     if ([self setGrid]) {
         [self arrangeCardViews];
-//        self.addCardsButton.enabled = YES;
-//        self.cardsArePinchedTogether = NO;
     } else {
         NSLog(@"rearrangeCardViews: grid is invalid");
     }
@@ -243,41 +204,63 @@
 - (void)arrangeCardViews
 // arranges onto existing grid, animated.
 {
-    [UIView transitionWithView:self.table
-                      duration:0.5
-                       options:UIViewAnimationOptionBeginFromCurrentState
-                    animations:^{
-                        NSUInteger index = 0;
-                        while (index < [self.cardViews count]) {
-                            UIView *cardView = self.cardViews[index];
-                            NSUInteger row = index / self.grid.columnCount;
-                            NSUInteger column = index % self.grid.columnCount;
-                            cardView.frame = [self.grid frameOfCellAtRow:row inColumn:column];
-                            index++;
-                        }
-                    } completion:^(BOOL finished) {
-                        nil;
-                    }];
-    
-    
-//    [UIView animateWithDuration:0.5
-//                     animations:^{
-//                         NSUInteger index = 0;
-//                         while (index < [self.cardViews count]) {
-//                             UIView *cardView = self.cardViews[index];
-//                             NSUInteger row = index / self.grid.columnCount;
-//                             NSUInteger column = index % self.grid.columnCount;
-//                             cardView.frame = [self.grid frameOfCellAtRow:row inColumn:column];
-//                             index++;
-//                         }
-//                     }];
+    [UIView animateWithDuration:0.5
+                     animations:^{
+                         NSUInteger index = 0;
+                         while (index < [self.cardViews count]) {
+                             UIView *cardView = self.cardViews[index];
+                             NSUInteger row = index / self.grid.columnCount;
+                             NSUInteger column = index % self.grid.columnCount;
+                             cardView.frame = [self.grid frameOfCellAtRow:row inColumn:column];
+                             index++;
+                         }
+                     }];
+}
+
+- (void)removeMatchedCards{
+    NSUInteger index = 0;
+    UIView *cardView = [self.cardViews firstObject];
+    while (cardView) {
+        Card *card = [self.game cardAtIndex:cardView.tag];
+        if (card.isMatched) {
+            [self.cardViews removeObject:cardView];
+            [cardView removeFromSuperview];
+        } else {
+            index++;
+        }
+        if (index < [self.cardViews count]) {
+            cardView = self.cardViews[index];
+        } else {
+            break;
+        }
+    }
+}
+
+- (void)updateCardViews {
+    for (UIView *cardView in self.cardViews) {
+        [self setCardView:cardView
+                usingCard:[self.game cardAtIndex:cardView.tag]];
+    }
 }
 
 - (void)updateUI
 {
     [self updateCardViews];
-    [self rearrangeCardViews];
-    self.scoreLabel.text = [NSString stringWithFormat:@"Score: %d", self.game.score];
+    if (self.game.matchScore) { // have a match with last card chosen?
+        if (self.matchedCardsAreToBeRemoved) {
+            [UIView transitionWithView:self.table
+                              duration:1.0
+                               options:UIViewAnimationOptionTransitionCrossDissolve
+                            animations:^{
+                                [self removeMatchedCards];
+                            } completion:^(BOOL finished) {
+                                if (finished) {
+                                    [self rearrangeCardViews];
+                                }
+                            }];
+        }
+    }
+    self.scoreLabel.text = [NSString stringWithFormat:@"Score: %ld", (long)self.game.score];
 }
 
 - (void)handleTap:(UITapGestureRecognizer *)sender
@@ -306,7 +289,7 @@
                 sender.scale = 1.0;
             }
         } else if (sender.state == UIGestureRecognizerStateEnded) {
-            if (sender.scale >= 1.0) {  // ended still pinching apart?
+            if (sender.scale >= 1.0) {  // still pinching apart?
                 [self.attachmentBehaviours removeAllObjects];
                 [self.animator removeAllBehaviors];
                 [self rearrangeCardViews];

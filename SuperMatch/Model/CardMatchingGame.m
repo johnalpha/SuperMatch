@@ -95,7 +95,7 @@
                 
 //***********************
 //**** ALWAYS MATCH *****
- self.matchScore = 4;
+// self.matchScore = 4;
 //***********************
                 
                 if (self.matchScore) {
