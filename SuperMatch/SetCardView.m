@@ -5,6 +5,10 @@
 //  Created by john on 06/12/2013.
 //  Copyright (c) 2013 CS193p. All rights reserved.
 //
+// Set card properties are displayed as follows:
+// colour:  1 = red         2 = green       3 = purple
+// shading: 1 = not filled  2 = striped     3 = filled
+// shape:   1 = squiggle    2 = diamond     3 = oval
 
 #import "SetCardView.h"
 
@@ -43,6 +47,13 @@
 - (void)setChosen:(BOOL)chosen {
     if (_chosen != chosen) {
         _chosen = chosen;
+        [self setNeedsDisplay];
+    }
+}
+
+- (void)setMarked:(BOOL)marked {
+    if (_marked != marked) {
+        _marked = marked;
         [self setNeedsDisplay];
     }
 }
@@ -194,19 +205,31 @@
 
 #define CORNER_RADIUS 0.2
 
+- (void)addMark
+{
+    CGFloat inset_x = self.bounds.size.width * 0.1;
+    CGFloat inset_y = self.bounds.size.height * 0.1;
+    CGFloat width = inset_x;
+    CGFloat height = width;
+    CGRect r = CGRectMake(inset_x, inset_y, width, height);
+    UIBezierPath *circle = [UIBezierPath bezierPathWithOvalInRect:r];
+    [[UIColor blueColor]setFill];
+    [circle fill];
+}
+
 - (void)drawBlankCard {
     UIBezierPath *path = [UIBezierPath bezierPathWithRoundedRect:self.bounds
                                                     cornerRadius:(self.bounds.size.width * CORNER_RADIUS)];
-    
     [[UIColor whiteColor] setFill];
     if (self.isChosen) [[UIColor yellowColor] setFill];
     
     [[UIColor blackColor] setStroke];
-        
+    
     [path addClip];
     [path fill];
     [path stroke];
     
+    if (self.isMarked) [self addMark];
 }
 
 - (void)drawRect:(CGRect)rect

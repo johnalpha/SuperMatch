@@ -16,5 +16,5 @@
 @property (nonatomic) NSUInteger colour;
 @property (nonatomic) NSUInteger shading;
 @property (nonatomic, getter = isChosen) BOOL chosen;
-
+@property (nonatomic, getter = isMarked) BOOL marked;
 @end

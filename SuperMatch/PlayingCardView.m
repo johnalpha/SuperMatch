@@ -103,7 +103,7 @@
     cornerFont = [cornerFont fontWithSize:cornerFont.pointSize * [self cornerScaleFactor]];
     
     NSAttributedString *cornerText = [[NSAttributedString alloc]initWithString:[NSString stringWithFormat:@"%@\n%@", [self rankAsString], self.suit]
-                                                                    attributes:@{NSFontAttributeName: cornerFont, NSParagraphStyleAttributeName: paragraphStyle}];
+                                                                    attributes:@{NSFontAttributeName:cornerFont, NSParagraphStyleAttributeName: paragraphStyle}];
     // top left corner
     CGRect textBounds;
     textBounds.origin = CGPointMake([self cornerOffset], [self cornerOffset]);

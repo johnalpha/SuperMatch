@@ -154,6 +154,7 @@
 		A84B6D9C1850AA4400589B27 /* SuperMatch */ = {
 			isa = PBXGroup;
 			children = (
+				A8B5A7AB1886C0200030A71B /* iPad */,
 				A84B6DA81850AA4400589B27 /* Main.storyboard */,
 				A84B6DAB1850AA4400589B27 /* CardGameViewController.h */,
 				A84B6DAC1850AA4400589B27 /* CardGameViewController.m */,
@@ -234,6 +235,13 @@
 				A866C828185251540023DC95 /* SetCardView.m */,
 			);
 			name = Views;
+			sourceTree = "<group>";
+		};
+		A8B5A7AB1886C0200030A71B /* iPad */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			name = iPad;
 			sourceTree = "<group>";
 		};
 		A8B73286186B034600CC7ECD /* reminders */ = {
@@ -489,7 +497,9 @@
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "SuperMatch/SuperMatch-Prefix.pch";
 				INFOPLIST_FILE = "SuperMatch/SuperMatch-Info.plist";
+				IPHONEOS_DEPLOYMENT_TARGET = 7.0;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				TARGETED_DEVICE_FAMILY = "1,2";
 				WRAPPER_EXTENSION = app;
 			};
 			name = Debug;
@@ -502,7 +512,9 @@
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "SuperMatch/SuperMatch-Prefix.pch";
 				INFOPLIST_FILE = "SuperMatch/SuperMatch-Info.plist";
+				IPHONEOS_DEPLOYMENT_TARGET = 7.0;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				TARGETED_DEVICE_FAMILY = "1,2";
 				WRAPPER_EXTENSION = app;
 			};
 			name = Release;

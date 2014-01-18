@@ -11,10 +11,9 @@
 
 @interface CardGameViewController ()
 @property (weak, nonatomic) IBOutlet UIView *table;
+@property (strong, nonatomic, readwrite) CardMatchingGame *game;
+@property (strong, nonatomic, readwrite) NSMutableArray *cardViews; // of UIViews
 @property (weak, nonatomic) IBOutlet UILabel *scoreLabel;
-@property (weak, nonatomic) IBOutlet UIButton *addCardsButton;
-@property (strong, nonatomic) CardMatchingGame *game;
-@property (strong, nonatomic) NSMutableArray *cardViews; // of UIViews
 @property (strong, nonatomic) Grid *grid;
 @property (strong, nonatomic) UIDynamicAnimator *animator;
 @property (strong, nonatomic) NSMutableArray *attachmentBehaviours; // of UIAttachmentBehaviours
@@ -92,7 +91,6 @@
     [super viewDidLoad];
     [self setUp];
     [self createCardViewsFromCards:self.game.cards];
-    self.addCardsButton.enabled = YES;
     self.cardsArePinchedTogether = NO;
 
 }
@@ -122,30 +120,22 @@
 // cardViews will be zero size and centred at the lower left-hand corner of the table.
 {
     for (Card *card in cards) {
-        [self createCardViewFromCard:card];
+        CGPoint location = CGPointMake(0.0, self.table.bounds.size.height);
+        UIView *cardView = [self cardViewInRectangle:CGRectZero];
+        if (cardView) {
+            [self setCardView:cardView usingCard:card];
+            [cardView addGestureRecognizer:[[UITapGestureRecognizer alloc]initWithTarget:self
+                                                                                  action:@selector(handleTap:)]];
+            cardView.center = location;
+            cardView.tag = [self.game indexForCard:card];
+            
+            [self.cardViews addObject:cardView];
+            [self.table addSubview:cardView];
+        }
     }
 }
 
-- (UIView *)createCardViewFromCard:(Card *)card
-// cardView will be zero size and centred at the lower left-hand corner of the table.
-{
-    CGPoint location = CGPointMake(0.0, self.table.bounds.size.height); // lower left-hand corner of table
-    UIView *cardView = [self cardViewInRectangle:CGRectZero];
-    if (cardView) {
-        [self setCardView:cardView usingCard:card];
-        [cardView addGestureRecognizer:[[UITapGestureRecognizer alloc]initWithTarget:self
-                                                                              action:@selector(handleTap:)]];
-        cardView.center = location;
-        cardView.tag = [self.game indexForCard:card];
-        
-        [self.cardViews addObject:cardView];
-        [self.table addSubview:cardView];
-    }
-    return cardView;
-    
-}
-
-#define MINIMUM_COLUMN_COUNT 5
+#define MINIMUM_COLUMN_COUNT 6
 
 - (BOOL)setGrid
 // tries to set a grid to display the existing set of card views.
@@ -189,6 +179,7 @@
         delay += delayIncrement;
         index++;
     }
+    self.cardsArePinchedTogether = NO;
 }
 
 - (void)rearrangeCardViews
@@ -215,51 +206,18 @@
                              index++;
                          }
                      }];
-}
-
-- (void)removeMatchedCards{
-    NSUInteger index = 0;
-    UIView *cardView = [self.cardViews firstObject];
-    while (cardView) {
-        Card *card = [self.game cardAtIndex:cardView.tag];
-        if (card.isMatched) {
-            [self.cardViews removeObject:cardView];
-            [cardView removeFromSuperview];
-        } else {
-            index++;
-        }
-        if (index < [self.cardViews count]) {
-            cardView = self.cardViews[index];
-        } else {
-            break;
-        }
-    }
+    self.cardsArePinchedTogether = NO;
 }
 
 - (void)updateCardViews {
     for (UIView *cardView in self.cardViews) {
-        [self setCardView:cardView
-                usingCard:[self.game cardAtIndex:cardView.tag]];
+        [self setCardView:cardView usingCard:[self.game cardAtIndex:cardView.tag]];
     }
 }
 
 - (void)updateUI
 {
     [self updateCardViews];
-    if (self.game.matchScore) { // have a match with last card chosen?
-        if (self.matchedCardsAreToBeRemoved) {
-            [UIView transitionWithView:self.table
-                              duration:1.0
-                               options:UIViewAnimationOptionTransitionCrossDissolve
-                            animations:^{
-                                [self removeMatchedCards];
-                            } completion:^(BOOL finished) {
-                                if (finished) {
-                                    [self rearrangeCardViews];
-                                }
-                            }];
-        }
-    }
     self.scoreLabel.text = [NSString stringWithFormat:@"Score: %ld", (long)self.game.score];
 }
 
@@ -270,8 +228,6 @@
         [self.attachmentBehaviours removeAllObjects];
         [self.animator removeAllBehaviors];
         [self rearrangeCardViews];
-        self.addCardsButton.enabled = YES;
-        self.cardsArePinchedTogether = NO;
     } else {
         [self.game chooseCardAtIndex:sender.view.tag];
     }
@@ -286,6 +242,10 @@
             sender.scale = 1.0;
         } else if (sender.state == UIGestureRecognizerStateChanged) {
             if (sender.scale > 1.0) {   // pinching apart?
+                CGFloat scaleFactor = pow(sender.scale, 5.0);
+                for (UIAttachmentBehavior *attachmentBehaviour in self.attachmentBehaviours) {
+                    attachmentBehaviour.length *= scaleFactor;
+                }
                 sender.scale = 1.0;
             }
         } else if (sender.state == UIGestureRecognizerStateEnded) {
@@ -293,8 +253,6 @@
                 [self.attachmentBehaviours removeAllObjects];
                 [self.animator removeAllBehaviors];
                 [self rearrangeCardViews];
-                self.addCardsButton.enabled = YES;
-                self.cardsArePinchedTogether = NO;
             }
         }
     } else {
@@ -308,8 +266,8 @@
             }
         } else if (sender.state == UIGestureRecognizerStateChanged) {
             if (sender.scale < 1.0) {  // pinching together?
+                CGFloat scaleFactor = pow(sender.scale, 10.0);
                 for (UIAttachmentBehavior *attachmentBehaviour in self.attachmentBehaviours) {
-                    CGFloat scaleFactor = pow(sender.scale, 10.0);
                     attachmentBehaviour.length *= scaleFactor;
                     CGFloat lowerLimit = (arc4random() % 10);
                     attachmentBehaviour.length = (attachmentBehaviour.length > lowerLimit ? attachmentBehaviour.length : lowerLimit);
@@ -317,7 +275,6 @@
             }
             sender.scale = 1.0;
         } else if (sender.state == UIGestureRecognizerStateEnded) {
-            self.addCardsButton.enabled = NO;
             self.cardsArePinchedTogether = YES;
         }
     }
@@ -337,41 +294,9 @@
     }
 }
 
-#define NUMBER_OF_CARDS_TO_ADD 3
-
-- (BOOL)addCards:(NSUInteger)numberOfCardsToAdd
-{
-    // adds cards to the game.
-    // re-deals all the cards.
-    BOOL success = YES;
-    
-    NSArray *newCards = [self.game addCards:numberOfCardsToAdd];
-    
-    if (newCards) {
-        [self createCardViewsFromCards:newCards];
-//        [self redealCardViews];
-        [self rearrangeCardViews];
-    } else {
-        success = NO;
-    }
-    
-    return success;
-}
-
-- (IBAction)addCards
-{
-    if (!self.cardsArePinchedTogether) {
-        if (![self addCards:NUMBER_OF_CARDS_TO_ADD]) {
-            self.addCardsButton.enabled = NO;
-            NSLog(@"No more cards!");
-        }
-    }
-}
-
 - (void)clearTheTableAndDealNewCardsAnimated
 // clears the table (animated) and deals new cards
 {
-    self.game = nil;    // this will cause new cards to be created in self.game's initialiser.
     CGPoint centre = CGPointMake(self.table.bounds.size.width, 0.0);  // the vanishing point!
     [UIView animateWithDuration:0.5
                      animations:^{
@@ -391,9 +316,9 @@
 
 - (IBAction)newGame
 {
-    NSLog(@"newGame");
+    self.game = nil;    // this will cause new cards to be created in self.game's initialiser.
     [self clearTheTableAndDealNewCardsAnimated];
-    self.scoreLabel.text = [NSString stringWithFormat:@"Score: 0"];
+    [self updateUI];
 }
 
 @end

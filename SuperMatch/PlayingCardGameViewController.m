@@ -19,7 +19,6 @@
     self.cardAspectRatio = 0.75;
     self.numberOfCardsToDeal = 22;
     self.numberOfCardsToMatch = 2;
-    self.matchedCardsAreToBeRemoved = NO;
 }
 
 - (Deck *)createDeck {

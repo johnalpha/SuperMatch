@@ -14,13 +14,20 @@
 
 @interface CardGameViewController : UIViewController
 
+@property (strong, nonatomic, readonly) CardMatchingGame *game;
+@property (strong, nonatomic, readonly) NSMutableArray *cardViews; // of UIViews
+
+- (void)updateUI;   // if overridden, subclass method must call [super updateUI] before any other code
+
+- (void)createCardViewsFromCards:(NSArray *)cards;
+- (void)rearrangeCardViews;
+
 //--------------------- properties which must be set by concrete subclasses --------------------------
-@property (nonatomic) BOOL matchedCardsAreToBeRemoved;
 @property (nonatomic) NSUInteger numberOfCardsToDeal;
 @property (nonatomic) NSUInteger numberOfCardsToMatch;
 @property (nonatomic) CGFloat cardAspectRatio;
 
-//----------------- abstract methods ------------------- protected - for sub-classes -----------------
+//----------------- abstract methods which must be implemented by concrete subclasses ----------------
 - (void)setUp;
 - (Deck *)createDeck;
 - (UIView *)cardViewInRectangle:(CGRect)rect;

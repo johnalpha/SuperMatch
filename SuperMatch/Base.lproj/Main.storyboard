@@ -28,8 +28,8 @@
             <objects>
                 <viewController id="HKI-YN-98l" customClass="PlayingCardGameViewController" sceneMemberID="viewController">
                     <layoutGuides>
-                        <viewControllerLayoutGuide type="top" id="RKy-nU-aKn"/>
-                        <viewControllerLayoutGuide type="bottom" id="h0f-9P-R6D"/>
+                        <viewControllerLayoutGuide type="top" id="APS-QS-Fmd"/>
+                        <viewControllerLayoutGuide type="bottom" id="rJ3-GA-YsR"/>
                     </layoutGuides>
                     <view key="view" contentMode="scaleToFill" id="xhX-gN-lcq">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="480"/>
@@ -52,10 +52,10 @@
                                 </subviews>
                                 <color key="backgroundColor" red="0.0" green="0.50196081399917603" blue="0.25098040699958801" alpha="1" colorSpace="calibratedRGB"/>
                                 <constraints>
-                                    <constraint firstAttribute="trailing" secondItem="lgz-U8-abe" secondAttribute="trailing" constant="20" symbolic="YES" id="1Rb-OT-NHo"/>
-                                    <constraint firstItem="lgz-U8-abe" firstAttribute="leading" secondItem="QmC-3G-mb4" secondAttribute="leading" constant="20" symbolic="YES" id="37N-i5-A0y"/>
-                                    <constraint firstAttribute="bottom" secondItem="lgz-U8-abe" secondAttribute="bottom" constant="20" symbolic="YES" id="Qgt-do-ISb"/>
-                                    <constraint firstItem="lgz-U8-abe" firstAttribute="top" secondItem="QmC-3G-mb4" secondAttribute="top" constant="20" symbolic="YES" id="mjr-08-1MX"/>
+                                    <constraint firstItem="lgz-U8-abe" firstAttribute="top" secondItem="QmC-3G-mb4" secondAttribute="top" constant="20" symbolic="YES" id="0D4-cV-46v"/>
+                                    <constraint firstItem="lgz-U8-abe" firstAttribute="leading" secondItem="QmC-3G-mb4" secondAttribute="leading" constant="20" symbolic="YES" id="8KY-ed-b34"/>
+                                    <constraint firstAttribute="bottom" secondItem="lgz-U8-abe" secondAttribute="bottom" constant="20" symbolic="YES" id="Z7m-6B-79O"/>
+                                    <constraint firstAttribute="trailing" secondItem="lgz-U8-abe" secondAttribute="trailing" constant="20" symbolic="YES" id="gpR-Sc-C2g"/>
                                 </constraints>
                             </view>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ulF-X1-lJo">
@@ -78,14 +78,14 @@
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
                         <gestureRecognizers/>
                         <constraints>
-                            <constraint firstItem="1fQ-8c-V0P" firstAttribute="top" secondItem="RKy-nU-aKn" secondAttribute="bottom" constant="9" id="34S-lX-kWI"/>
-                            <constraint firstItem="QmC-3G-mb4" firstAttribute="top" secondItem="1fQ-8c-V0P" secondAttribute="bottom" constant="8" symbolic="YES" id="3pC-QB-ijl"/>
-                            <constraint firstItem="ulF-X1-lJo" firstAttribute="centerX" secondItem="QmC-3G-mb4" secondAttribute="centerX" id="C9O-gs-fzd"/>
-                            <constraint firstItem="1fQ-8c-V0P" firstAttribute="leading" secondItem="xhX-gN-lcq" secondAttribute="leading" constant="20" symbolic="YES" id="Dd8-nl-m87"/>
-                            <constraint firstItem="h0f-9P-R6D" firstAttribute="top" secondItem="ulF-X1-lJo" secondAttribute="bottom" constant="4" id="NSo-ZI-IXz"/>
-                            <constraint firstAttribute="trailing" secondItem="QmC-3G-mb4" secondAttribute="trailing" id="Trt-NB-Hxe"/>
-                            <constraint firstItem="QmC-3G-mb4" firstAttribute="leading" secondItem="xhX-gN-lcq" secondAttribute="leading" id="rbU-8P-eRZ"/>
-                            <constraint firstItem="ulF-X1-lJo" firstAttribute="top" secondItem="QmC-3G-mb4" secondAttribute="bottom" constant="8" symbolic="YES" id="wWl-zd-DtA"/>
+                            <constraint firstAttribute="trailing" secondItem="QmC-3G-mb4" secondAttribute="trailing" id="7vS-xr-i7l"/>
+                            <constraint firstItem="ulF-X1-lJo" firstAttribute="centerX" secondItem="QmC-3G-mb4" secondAttribute="centerX" id="BFT-8U-8BZ"/>
+                            <constraint firstItem="ulF-X1-lJo" firstAttribute="top" secondItem="QmC-3G-mb4" secondAttribute="bottom" constant="8" symbolic="YES" id="Eva-TA-QbM"/>
+                            <constraint firstItem="1fQ-8c-V0P" firstAttribute="leading" secondItem="xhX-gN-lcq" secondAttribute="leading" constant="20" symbolic="YES" id="LW8-9A-VUu"/>
+                            <constraint firstItem="QmC-3G-mb4" firstAttribute="leading" secondItem="xhX-gN-lcq" secondAttribute="leading" id="QcP-iZ-sKn"/>
+                            <constraint firstItem="QmC-3G-mb4" firstAttribute="top" secondItem="1fQ-8c-V0P" secondAttribute="bottom" constant="8" symbolic="YES" id="YdF-Vb-eqa"/>
+                            <constraint firstItem="1fQ-8c-V0P" firstAttribute="top" secondItem="APS-QS-Fmd" secondAttribute="bottom" constant="9" id="mOl-MJ-K5G"/>
+                            <constraint firstItem="rJ3-GA-YsR" firstAttribute="top" secondItem="ulF-X1-lJo" secondAttribute="bottom" constant="4" id="xI0-qT-21m"/>
                         </constraints>
                     </view>
                     <tabBarItem key="tabBarItem" title="Playing Cards" id="deD-73-lgh"/>
@@ -146,8 +146,8 @@
             <objects>
                 <viewController id="ku1-Wn-PmR" customClass="SetCardGameViewController" sceneMemberID="viewController">
                     <layoutGuides>
-                        <viewControllerLayoutGuide type="top" id="Isf-UL-oBV"/>
-                        <viewControllerLayoutGuide type="bottom" id="C4M-J6-Naj"/>
+                        <viewControllerLayoutGuide type="top" id="mhK-qO-300"/>
+                        <viewControllerLayoutGuide type="bottom" id="llB-N0-HJw"/>
                     </layoutGuides>
                     <view key="view" contentMode="scaleToFill" id="c7q-8w-vRS">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="480"/>
@@ -170,10 +170,10 @@
                                 </subviews>
                                 <color key="backgroundColor" red="0.0" green="0.50196081400000003" blue="0.25098040700000002" alpha="1" colorSpace="calibratedRGB"/>
                                 <constraints>
-                                    <constraint firstAttribute="trailing" secondItem="Im4-7w-Phu" secondAttribute="trailing" constant="20" symbolic="YES" id="Ufb-Fd-K1n"/>
-                                    <constraint firstItem="Im4-7w-Phu" firstAttribute="top" secondItem="tac-pg-YSS" secondAttribute="top" constant="20" symbolic="YES" id="eBH-cE-WjV"/>
-                                    <constraint firstAttribute="bottom" secondItem="Im4-7w-Phu" secondAttribute="bottom" constant="20" symbolic="YES" id="u9m-Gj-ZTH"/>
-                                    <constraint firstItem="Im4-7w-Phu" firstAttribute="leading" secondItem="tac-pg-YSS" secondAttribute="leading" constant="20" symbolic="YES" id="wAO-sF-eQO"/>
+                                    <constraint firstAttribute="trailing" secondItem="Im4-7w-Phu" secondAttribute="trailing" constant="20" symbolic="YES" id="Tmo-wc-L85"/>
+                                    <constraint firstAttribute="bottom" secondItem="Im4-7w-Phu" secondAttribute="bottom" constant="20" symbolic="YES" id="YM4-Cz-Eh4"/>
+                                    <constraint firstItem="Im4-7w-Phu" firstAttribute="top" secondItem="tac-pg-YSS" secondAttribute="top" constant="20" symbolic="YES" id="Yeq-nV-lXD"/>
+                                    <constraint firstItem="Im4-7w-Phu" firstAttribute="leading" secondItem="tac-pg-YSS" secondAttribute="leading" constant="20" symbolic="YES" id="zxF-eR-eGj"/>
                                 </constraints>
                             </view>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ann-vZ-riy">
@@ -193,34 +193,47 @@
                                 <nil key="highlightedColor"/>
                             </label>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="PSB-em-45Q">
-                                <rect key="frame" x="20" y="397" width="60" height="30"/>
+                                <rect key="frame" x="240" y="397" width="60" height="30"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <state key="normal" title="+3 cards">
                                     <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                 </state>
                                 <connections>
-                                    <action selector="addCards" destination="ku1-Wn-PmR" eventType="touchUpInside" id="Qcn-qe-ykq"/>
+                                    <action selector="addThreeCards" destination="ku1-Wn-PmR" eventType="touchUpInside" id="t0R-fZ-J3d"/>
+                                </connections>
+                            </button>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="WRj-x6-8Dc">
+                                <rect key="frame" x="20" y="397" width="30" height="30"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <state key="normal" title="Hint">
+                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                                <connections>
+                                    <action selector="hint:" destination="ku1-Wn-PmR" eventType="touchUpInside" id="uXo-bs-ubc"/>
                                 </connections>
                             </button>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
                         <constraints>
-                            <constraint firstItem="ann-vZ-riy" firstAttribute="baseline" secondItem="PSB-em-45Q" secondAttribute="baseline" id="4sW-IC-7bP"/>
-                            <constraint firstItem="bYL-ql-31Z" firstAttribute="leading" secondItem="c7q-8w-vRS" secondAttribute="leading" constant="20" symbolic="YES" id="9ev-On-hbq"/>
-                            <constraint firstItem="tac-pg-YSS" firstAttribute="leading" secondItem="c7q-8w-vRS" secondAttribute="leading" id="A5V-SZ-bm2"/>
-                            <constraint firstItem="C4M-J6-Naj" firstAttribute="top" secondItem="PSB-em-45Q" secondAttribute="bottom" constant="4" id="BX5-xp-7k2"/>
-                            <constraint firstItem="tac-pg-YSS" firstAttribute="centerX" secondItem="ann-vZ-riy" secondAttribute="centerX" id="GFf-rv-WD8"/>
-                            <constraint firstItem="bYL-ql-31Z" firstAttribute="leading" secondItem="PSB-em-45Q" secondAttribute="leading" id="Myd-mI-GHr"/>
-                            <constraint firstItem="bYL-ql-31Z" firstAttribute="top" secondItem="Isf-UL-oBV" secondAttribute="bottom" constant="9" id="cZp-Ci-ip4"/>
-                            <constraint firstAttribute="trailing" secondItem="tac-pg-YSS" secondAttribute="trailing" id="e1X-l6-Icf"/>
-                            <constraint firstItem="tac-pg-YSS" firstAttribute="top" secondItem="bYL-ql-31Z" secondAttribute="bottom" constant="8" symbolic="YES" id="h9W-IR-URC"/>
-                            <constraint firstItem="PSB-em-45Q" firstAttribute="top" secondItem="tac-pg-YSS" secondAttribute="bottom" constant="8" symbolic="YES" id="wei-6V-oeI"/>
+                            <constraint firstAttribute="trailing" secondItem="tac-pg-YSS" secondAttribute="trailing" id="0mX-Iv-yje"/>
+                            <constraint firstItem="bYL-ql-31Z" firstAttribute="leading" secondItem="c7q-8w-vRS" secondAttribute="leading" constant="20" symbolic="YES" id="2Iz-kO-dUZ"/>
+                            <constraint firstItem="bYL-ql-31Z" firstAttribute="top" secondItem="mhK-qO-300" secondAttribute="bottom" constant="9" id="5XS-bT-7gD"/>
+                            <constraint firstAttribute="trailing" secondItem="PSB-em-45Q" secondAttribute="trailing" constant="20" symbolic="YES" id="6Jf-GF-7MP"/>
+                            <constraint firstItem="PSB-em-45Q" firstAttribute="top" secondItem="tac-pg-YSS" secondAttribute="bottom" constant="8" symbolic="YES" id="85A-4t-rUm"/>
+                            <constraint firstItem="ann-vZ-riy" firstAttribute="centerX" secondItem="tac-pg-YSS" secondAttribute="centerX" id="JWN-Ho-f59"/>
+                            <constraint firstItem="WRj-x6-8Dc" firstAttribute="leading" secondItem="bYL-ql-31Z" secondAttribute="leading" id="bku-lo-mdq"/>
+                            <constraint firstItem="tac-pg-YSS" firstAttribute="leading" secondItem="c7q-8w-vRS" secondAttribute="leading" id="h4V-Ya-Ch2"/>
+                            <constraint firstItem="PSB-em-45Q" firstAttribute="baseline" secondItem="ann-vZ-riy" secondAttribute="baseline" id="mDe-T9-dm7"/>
+                            <constraint firstItem="llB-N0-HJw" firstAttribute="top" secondItem="PSB-em-45Q" secondAttribute="bottom" constant="4" id="vZN-Uq-SYp"/>
+                            <constraint firstItem="WRj-x6-8Dc" firstAttribute="baseline" secondItem="ann-vZ-riy" secondAttribute="baseline" id="xRN-pP-hjt"/>
+                            <constraint firstItem="tac-pg-YSS" firstAttribute="top" secondItem="bYL-ql-31Z" secondAttribute="bottom" constant="8" symbolic="YES" id="z9h-f9-H15"/>
                         </constraints>
                     </view>
                     <tabBarItem key="tabBarItem" title="Item" id="4n5-Ie-xId"/>
                     <navigationItem key="navigationItem" title="Set Cards" id="AlP-mS-Rjp"/>
                     <connections>
                         <outlet property="addCardsButton" destination="PSB-em-45Q" id="caa-lk-18J"/>
+                        <outlet property="hintButton" destination="WRj-x6-8Dc" id="ALY-WI-cyv"/>
                         <outlet property="scoreLabel" destination="bYL-ql-31Z" id="mJD-ws-WFT"/>
                         <outlet property="table" destination="Im4-7w-Phu" id="wyf-Rk-Vxc"/>
                     </connections>
